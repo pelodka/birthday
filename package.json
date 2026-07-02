@@ -1,0 +1,65 @@
+{
+  "name": "birthday",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "desktop": "npm run build && electron .",
+    "desktop:pack": "npm run build && electron-builder --dir",
+    "desktop:dist:win:zip": "npm run build && electron-builder --win zip --x64",
+    "desktop:dist": "npm run build && electron-builder",
+    "preview": "vite preview",
+    "test": "npm run validate:assets && npm run test:act1 && npm run test:act2 && npm run test:act3 && npm run test:act4",
+    "test:act1": "node scripts/test-act1-smoke.mjs",
+    "test:act2": "node scripts/test-act2-smoke.mjs",
+    "test:act3": "node scripts/test-act3-smoke.mjs",
+    "test:act4": "node scripts/test-act4-smoke.mjs",
+    "validate:assets": "node scripts/validate-assets.mjs"
+  },
+  "build": {
+    "appId": "com.projectjubilee.birthday",
+    "productName": "Project Jubilee 50",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.games",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "tar.gz"
+      ],
+      "category": "Game"
+    }
+  },
+  "devDependencies": {
+    "@types/three": "^0.183.1",
+    "electron": "^42.3.0",
+    "electron-builder": "^26.8.1",
+    "playwright": "^1.58.2",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.1"
+  },
+  "dependencies": {
+    "three": "^0.183.2"
+  }
+}

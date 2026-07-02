@@ -1,0 +1,80 @@
+import type { SceneAudioConfig } from '../../types';
+import { AUDIO_HOOKS } from '../../audio/hooks';
+
+export const ACT_ONE_AUDIO: SceneAudioConfig = {
+  tracks: {
+    field: {
+      id: 'act-1-promise',
+      src: '/audio/act-1/music/promise.mp3',
+      loop: true,
+      volume: 0.62,
+      resume: true,
+    },
+    encounterIntro: 'act-1-encounter-sting',
+    battle: 'act-1-battle',
+    bossBattle: 'act-1-boss',
+    victory: 'act-1-victory',
+    artifact: 'act-1-artifact',
+    openingEncounter: {
+      id: 'act-1-guano-apes-big-in-japan',
+      src: '/audio/act-1/music/guano-apes-big-in-japan.mp3',
+      loop: true,
+      volume: 0.72,
+    },
+    podgornyEncounter: {
+      id: 'act-1-podgorny-ariya-bespechnyj-angel',
+      src: '/audio/act-1/music/ariya-bespechnyj-angel.mp3',
+      loop: false,
+      volume: 0.72,
+    },
+    secondEncounter: {
+      id: 'act-1-reis-piter-erevan',
+      src: '/audio/act-1/music/reis-piter-erevan.mp3',
+      loop: false,
+      volume: 0.72,
+      startTime: 44,
+    },
+  },
+  cues: {
+    introDialogue: 'field',
+    explore: 'field',
+    openingBattle: 'act-1-battle',
+    secondBattle: 'act-1-battle',
+    bossBattle: 'act-1-boss',
+    bossVictory: 'act-1-victory',
+    artifactDrop: 'act-1-artifact',
+    openingEncounter: 'openingEncounter',
+    podgornyEncounter: 'podgornyEncounter',
+    secondEncounter: 'secondEncounter',
+  },
+  voice: {
+    introDialogue: 'act-1-voice-intro',
+    openingEncounter: 'act-1-voice-opening-encounter',
+    secondEncounter: 'act-1-voice-second-encounter',
+    bossEncounter: 'act-1-voice-boss-encounter',
+    artifactDrop: 'act-1-voice-artifact-drop',
+    artifactOutro: 'act-1-voice-artifact-outro',
+  },
+  sfx: {
+    collection: {
+      id: 'shared-arcade-bonus',
+      src: '/audio/shared/sfx/arcade-bonus.mp3',
+      volume: 0.9,
+    },
+  },
+  hooks: {
+    [AUDIO_HOOKS.shared.collection]: { sfx: 'collection' },
+    [AUDIO_HOOKS.actOne.introDialogue]: { music: 'introDialogue', voice: 'introDialogue' },
+    [AUDIO_HOOKS.actOne.exploreStart]: { music: 'explore' },
+    [AUDIO_HOOKS.actOne.encounterStartOpening]: { music: 'openingEncounter', voice: 'openingEncounter' },
+    [AUDIO_HOOKS.actOne.encounterStartSecond]: { music: 'secondEncounter', voice: 'secondEncounter' },
+    [AUDIO_HOOKS.actOne.encounterStartBoss]: { music: 'podgornyEncounter', voice: 'bossEncounter' },
+    [AUDIO_HOOKS.actOne.battleStartOpening]: {},
+    [AUDIO_HOOKS.actOne.battleStartSecond]: {},
+    [AUDIO_HOOKS.actOne.battleStartBoss]: {},
+    [AUDIO_HOOKS.actOne.battleVictory]: { music: 'victory' },
+    [AUDIO_HOOKS.actOne.bossVictory]: {},
+    [AUDIO_HOOKS.actOne.artifactDrop]: { voice: 'artifactDrop' },
+    [AUDIO_HOOKS.actOne.artifactOutro]: { voice: 'artifactOutro' },
+  },
+} as const;
